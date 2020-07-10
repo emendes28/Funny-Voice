@@ -20,10 +20,15 @@
     "jest": "^21.2.1",
     "per-env": "^1.0.2",
     "preact-cli": "^2.1.0",
+    "preact-material-components": "^1.6.1",
     "preact-render-spy": "^1.2.1",
     "sharp": "^0.25.4"
   },
   "dependencies": {
+    "@iconify/icons-mdi": "^1.0.115",
+    "@material-icons/font": "^1.0.1",
+    "@material/button": "^7.0.0",
+    "@material/icon-button": "^7.0.0",
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
     "preact-render-to-string": "^4.1.0",

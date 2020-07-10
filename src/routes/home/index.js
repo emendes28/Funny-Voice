@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import style from './style';
-
+import { Icon, InlineIcon } from "@iconify/react";
+import microphone from "@iconify/icons-mdi/microphone";
 
 
 export default class Profile extends Component {
@@ -86,10 +87,9 @@ export default class Profile extends Component {
         <p>Em que pe estamos: {statusEscuta}.</p>
         <textarea  rows="4" cols="50">
           {oqueouvi}
-          </textarea>
-        <p>
-          <button onClick={this.testSpeech} disabled={btndisable}>Ouvir</button> 
-        </p>
+          </textarea><InlineIcon onClick={this.testSpeech} disabled={btndisable} icon={microphone} />
+        <Icon icon={home} />
+<p>This is some text with </p>
 
       </div>
     );
