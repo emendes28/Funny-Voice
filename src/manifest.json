@@ -1,6 +1,6 @@
 {
-  "name": "preact",
-  "short_name": "preact",
+  "name": "Funny Voice",
+  "short_name": "funnyVoice",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

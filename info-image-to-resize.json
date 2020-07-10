@@ -1,0 +1,13 @@
+{
+    "fileNameWithExtensionAndLocation": "input\\splash.png",
+    "resolutions": [
+        { 
+            "resolution": "512x512",
+            "fileNameWithExtensionAndLocation": "src\\assets\\icons\\android-chrome-512x512.png"
+        },
+        { 
+            "resolution": "192x192",
+            "fileNameWithExtensionAndLocation": "src\\assets\\icons\\android-chrome-192x192.png"
+        }
+    ]
+}
