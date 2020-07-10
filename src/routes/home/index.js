@@ -88,8 +88,6 @@ export default class Profile extends Component {
         <textarea  rows="4" cols="50">
           {oqueouvi}
           </textarea><InlineIcon onClick={this.testSpeech} disabled={btndisable} icon={microphone} />
-        <Icon icon={home} />
-<p>This is some text with </p>
 
       </div>
     );
