@@ -41,10 +41,8 @@ export default class Profile extends Component {
     const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
     const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
     const SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-    const grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
     const recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.lang = 'pt-BR';
     recognition.interimResults = false;
@@ -86,7 +84,9 @@ export default class Profile extends Component {
       <div class={style.profile}>
         <h1>O que ouvi: {user}</h1>
         <p>Em que pe estamos: {statusEscuta}.</p>
-        <input type="textarea" value={oqueouvi}  rows="4" cols="50"/>
+        <textarea  rows="4" cols="50">
+          {oqueouvi}
+          </textarea>
         <p>
           <button onClick={this.testSpeech} disabled={btndisable}>Ouvir</button> 
         </p>
