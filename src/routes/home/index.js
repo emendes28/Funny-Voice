@@ -2,6 +2,8 @@ import { h, Component } from 'preact';
 import style from './style';
 import { Icon, InlineIcon } from "@iconify/react";
 import microphone from "@iconify/icons-mdi/microphone";
+import accountTieVoiceOutline from '@iconify/icons-mdi/account-tie-voice-outline';
+
 
 
 export default class Profile extends Component {
@@ -17,21 +19,18 @@ export default class Profile extends Component {
 
   
   speak = () => {
+    const synth = window.speechSynthesis;
       if (synth.speaking) {
           console.error('speechSynthesis.speaking');
           return;
       }
       if (this.state.oqueouvi !== '') {
       const utterThis = new SpeechSynthesisUtterance(this.state.oqueouvi);
-      const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-      for(i = 0; i < voices.length ; i++) {
-        if(voices[i].name === selectedOption) {
-          utterThis.voice = voices[i];
-          break;
-        }
-      }
-      utterThis.pitch = pitch.value;
-      utterThis.rate = rate.value;
+      const voice = window.speechSynthesis.getVoices();
+      const thevoice = voice.filter(voice => voice.lang === 'pt-BR');
+      utterThis.voice = thevoice[0];
+      utterThis.pitch = 1;
+      utterThis.rate = 1;
       synth.speak(utterThis);
     }
   }
@@ -87,8 +86,10 @@ export default class Profile extends Component {
         <p>Em que pe estamos: {statusEscuta}.</p>
         <textarea  rows="4" cols="50">
           {oqueouvi}
-          </textarea><InlineIcon onClick={this.testSpeech} disabled={btndisable} icon={microphone} />
-
+          </textarea><button  ><InlineIcon onClick={this.testSpeech} disabled={btndisable} icon={microphone} /></button>
+          <p>
+          <Icon onClick={this.speak} disabled={btndisable} icon={accountTieVoiceOutline} />
+          </p>
       </div>
     );
   }
