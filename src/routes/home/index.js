@@ -104,13 +104,6 @@ export default class Profile extends Component {
           <Icon onClick={this.speak} disabled={btndisable} icon={accountTieVoiceOutline} />
         </Card.Actions>
       </Card>
-          <Layout.Content>
-            <Router>
-              <Home path="/" default />
-              <Profile path="/profile" id="me" />
-              <Profile path="/profile/:id" />
-            </Router>
-          </Layout.Content>
         </Layout>
     );
   }
