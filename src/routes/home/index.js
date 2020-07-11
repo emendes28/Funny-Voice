@@ -34,7 +34,6 @@ export default class Profile extends Component {
       utterThis.pitch = 1.2;
       utterThis.rate = 0.6;
       synth.speak(utterThis);
-      synth.
     }
   }
 
