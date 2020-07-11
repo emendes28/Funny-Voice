@@ -5,7 +5,7 @@ import microphone from "@iconify/icons-mdi/microphone";
 import accountTieVoiceOutline from '@iconify/icons-mdi/account-tie-voice-outline';
 import Sidebar from "../../components/sidebar"
 
-import { Layout, Navigation, Card, Button, Icon, TextField } from "preact-mdl"
+import { Layout, Card } from "preact-mdl"
 
 
 export default class Profile extends Component {

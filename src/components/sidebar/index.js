@@ -1,5 +1,5 @@
 import { h, Component } from "preact"
-import { Layout, Navigation, Card, Button, Icon, TextField } from "preact-mdl"
+import { Layout, Navigation } from "preact-mdl"
 
 
 export default class Sidebar extends Component {
