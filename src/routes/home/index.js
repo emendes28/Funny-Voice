@@ -49,20 +49,20 @@ export default class Profile extends Component {
     recognition.maxAlternatives = 1;
   
     recognition.start();
-  
+    const thisContext = this;
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript.toLowerCase();
       
-      this.setState({ oqueouvi: speechResult,disabled: false });
+      thisContext.setState({ oqueouvi: speechResult,disabled: false });
     }
   
-    recognition.onspeechend = function() {
+    recognition.onspeechend = () => {
       recognition.stop();
-      this.setState({ statusEscuta: 'Pode comecar novamente',disabled: false });
+      thisContext.setState({ statusEscuta: 'Pode comecar novamente',disabled: false });
     }
   
-    recognition.onerror = function(event) {
-      this.setState({ statusEscuta: 'Deu ruim ! vamos tentar novamente ? '+ event.error,disabled: false });
+    recognition.onerror = (event) => {
+      thisContext.setState({ statusEscuta: 'Deu ruim ! vamos tentar novamente ? '+ event.error,disabled: false });
     }
     
     
