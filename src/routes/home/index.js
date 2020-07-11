@@ -3,7 +3,9 @@ import style from './style';
 import { Icon, InlineIcon } from "@iconify/react";
 import microphone from "@iconify/icons-mdi/microphone";
 import accountTieVoiceOutline from '@iconify/icons-mdi/account-tie-voice-outline';
+import Sidebar from "../../components/sidebar"
 
+import { Layout, Navigation, Card, Button, Icon, TextField } from "preact-mdl"
 
 
 export default class Profile extends Component {
@@ -29,9 +31,10 @@ export default class Profile extends Component {
       const voice = window.speechSynthesis.getVoices();
       const thevoice = voice.filter(voice => voice.lang === 'pt-BR');
       utterThis.voice = thevoice[0];
-      utterThis.pitch = 1;
-      utterThis.rate = 1;
+      utterThis.pitch = 1.2;
+      utterThis.rate = 0.6;
       synth.speak(utterThis);
+      synth.
     }
   }
 
@@ -81,16 +84,34 @@ export default class Profile extends Component {
   // Note: `user` comes from the URL, courtesy of our router
   render({ user }, { oqueouvi, btndisable, statusEscuta }) {
     return (
-      <div class={style.profile}>
-        <h1>O que ouvi: {user}</h1>
-        <p>Em que pe estamos: {statusEscuta}.</p>
+      
+      <Layout fixed-header fixed-drawer>
+      <Sidebar />
+      <Card shadow="4" class="full-width">
+        <Card.Title class="graphic">
+          <Card.TitleText>Fala eu que te escuto</Card.TitleText>
+        </Card.Title>
+        <Card.Text style="text-align:center">
+          
         <textarea  rows="4" cols="50">
           {oqueouvi}
-          </textarea><button  ><InlineIcon onClick={this.testSpeech} disabled={btndisable} icon={microphone} /></button>
-          <p>
+          </textarea>
+        </Card.Text>
+        <Card.Actions style="text-align:right">
+          <Icon onClick={this.testSpeech} disabled={btndisable} icon={microphone} />
+        </Card.Actions>
+        <Card.Actions style="text-align:left">
           <Icon onClick={this.speak} disabled={btndisable} icon={accountTieVoiceOutline} />
-          </p>
-      </div>
+        </Card.Actions>
+      </Card>
+          <Layout.Content>
+            <Router>
+              <Home path="/" default />
+              <Profile path="/profile" id="me" />
+              <Profile path="/profile/:id" />
+            </Router>
+          </Layout.Content>
+        </Layout>
     );
   }
 }
