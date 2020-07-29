@@ -27,7 +27,8 @@ export default class Profile extends Component {
 
   speak = () => {
 
-    this.rec();
+  //  console.log('ini',AudioTrack.sourceBuffer);
+
     const synth = window.speechSynthesis;
     if (synth.speaking) {
       console.error('speechSynthesis.speaking');
@@ -40,6 +41,8 @@ export default class Profile extends Component {
       utterThis.voice = thevoice[0];
       utterThis.pitch = this.state.tom;
       utterThis.rate = this.state.velocidade;
+      this.alien1Transform(utterThis);
+      utterThis.onboundary  = (event) => console.log(event);
       synth.speak(utterThis);
     }
   }
@@ -65,8 +68,7 @@ export default class Profile extends Component {
     return Promise.all([
       stopped,
       recorded
-    ])
-      .then(() => data);
+    ]).then(() => data);
   }
   stop = (stream) => {
     stream.getTracks().forEach(track => track.stop());
@@ -91,6 +93,37 @@ export default class Profile extends Component {
 
       })
       .catch(this.log);
+  }
+
+  alien1Transform(audioBuffer) {
+
+    let ctx = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
+  
+    let source = ctx.createBufferSource();
+    source.buffer = audioBuffer;
+  
+    let oscillator = ctx.createOscillator();
+    oscillator.frequency.value = 5;
+    oscillator.type = 'sine';
+  
+    let oscillatorGain = ctx.createGain();
+    oscillatorGain.gain.value = 0.05;
+  
+    let delay = ctx.createDelay();
+    delay.delayTime.value = 0.05;
+    
+    source.connect(delay);
+    delay.connect(ctx.destination);
+  
+    oscillator.connect(oscillatorGain);
+    oscillatorGain.connect(delay.delayTime);
+  
+    oscillator.start();
+    source.start();
+    return ctx.startRendering().then(
+      (outputAudioBuffer) => outputAudioBuffer
+    )
+  
   }
 
   testSpeech = () => {
@@ -154,7 +187,7 @@ export default class Profile extends Component {
 
       <Card shadow="4" class="full-width">
         <Card.Title class="graphic">
-          <Card.TitleText>Fala eu que te escuto</Card.TitleText>
+          <Card.TitleText>Fale ou escreva eu que te repito</Card.TitleText>
         </Card.Title>
         <Card.Text style="text-align:center">
           <fieldset> <figcaption>Mensagem</figcaption>
@@ -163,32 +196,11 @@ export default class Profile extends Component {
         </Card.Text>
         <Card.Actions style="text-align:center">
           <Icon width="15%" onClick={this.testSpeech} disabled={btndisable} icon={microphone} />
-        </Card.Actions>
-        <Card.Text style="text-align:center">
-
-          <fieldset> <figcaption>Ajuste da voz</figcaption>
-            <label for="veloz">Velocidade</label>
-            <Slider min="0.5" onChange={this.setVelocidade} max="2" value={velocidade} step="0.1" id="veloz" />
-            <label for="tonalidade">Tonalidade</label>
-            <Slider min="0" max="2" onChange={this.setTom} value={tom} step="0.1" id="tonalidade" />
-          </fieldset>
-
-        </Card.Text>
-        <Card.Actions style="text-align:center">
-
+    
           <Icon width="15%" onClick={this.speak} disabled={btndisable} icon={accountTieVoiceOutline} />
 
         </Card.Actions>
 
-        <Card.Text style="text-align:center">
-          <audio id="preview" width="160" height="120" controls></audio>
-        </Card.Text>
-        <Card.Actions style="text-align:center">
-          <a href={linkDownload} target="_blank">
-            <Icon width="15%" disabled={btndisable} icon={download} />
-          </a>
-
-        </Card.Actions>
       </Card>
     );
   }

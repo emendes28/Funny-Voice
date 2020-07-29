@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import style from './style';
 
-export default class Profile extends Component {
+export default class List extends Component {
   state = {
     time: Date.now(),
     count: 10,
@@ -26,21 +26,14 @@ export default class Profile extends Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
-
   // Note: `user` comes from the URL, courtesy of our router
   render({ user }, { time, count }) {
-    return (
-      <div class={style.profile}>
-        <h1>Profile: {user}</h1>
-        <p>This is the user profile for a user named {user}.</p>
-
-        <div>Current time: {new Date(time).toLocaleString()}</div>
-
-        <p>
-          <button onClick={this.increment}>Click Me</button> Clicked {count}{' '}
-          times.
-        </p>
-      </div>
+    return (      
+    <div>
+      <video id="video" src="media/video.mp4" controls="true" crossorigin="anonymous"/>
+      <canvas id="c1" width="160" height="96"></canvas>
+      <canvas id="c2" class={style.c2} width="160" height="96"></canvas>
+    </div>
     );
   }
 }

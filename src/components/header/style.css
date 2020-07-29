@@ -42,7 +42,9 @@
 .header nav a:active {
 	background: rgba(0,0,0,0.2);
 }
-
+.header {
+	position: relative;
+}
 .header nav a.active {
 	background: rgba(0,0,0,0.4);
 }
