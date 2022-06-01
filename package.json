@@ -22,7 +22,7 @@
     "preact-cli": "^2.1.0",
     "preact-material-components": "^1.6.1",
     "preact-render-spy": "^1.2.1",
-    "sharp": "^0.25.4"
+    "sharp": "^0.30.5"
   },
   "dependencies": {
     "@iconify/icons-mdi": "^1.0.115",
